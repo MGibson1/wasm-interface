@@ -3,6 +3,10 @@ name = "wasm-interfacegen"
 version = "0.1.0"
 edition = "2021"
 repository = "https://github.com/MGibson1/wasm-interfacegen"
+license = "GPL-3.0-or-later"
+description = """
+A derive macro to automatically create typescript interface definitions for your types.
+"""
 
 [lib]
 

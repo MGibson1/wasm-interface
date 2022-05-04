@@ -3,6 +3,10 @@ name = "wasm-interfacegen-macro"
 version = "0.1.0"
 edition = "2021"
 repository = "https://github.com/MGibson1/wasm-interfacegen/tree/main/crates/macro"
+license = "GPL-3.0-or-later"
+description = """
+Definition of the JsInterface procedural derive macro, an internal dependency of wasm-interfacegen
+"""
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 [lib]
