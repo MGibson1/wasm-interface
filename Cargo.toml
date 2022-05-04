@@ -3,6 +3,7 @@
 members = [
   "crates/macro",
   "crates/macro-support",
+  "crates/package"
 ]
 
 exclude = ["example"]
@@ -11,17 +12,3 @@ exclude = ["example"]
 allow-branch = ["main"]
 consolidate-commits = true
 consolidate-pushes = true
-
-[package]
-name = "wasm-interfacegen"
-version = "0.1.0"
-edition = "2021"
-repository = "https://github.com/MGibson1/wasm-interfacegen"
-
-[lib]
-
-[dependencies]
-static_assertions = "1.1.0"
-wasm-bindgen = "0.2.80"
-wasm-interfacegen-macro = { path = "crates/macro", version = "0.1.0" }
-wasm-interfacegen-macro-support = { path = "crates/macro-support", version = "0.1.0" }

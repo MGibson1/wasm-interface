@@ -1,0 +1,13 @@
+[package]
+name = "wasm-interfacegen"
+version = "0.1.0"
+edition = "2021"
+repository = "https://github.com/MGibson1/wasm-interfacegen"
+
+[lib]
+
+[dependencies]
+static_assertions = "1.1.0"
+wasm-bindgen = "0.2.80"
+wasm-interfacegen-macro = { path = "../macro", version = "0.1.0" }
+wasm-interfacegen-macro-support = { path = "../macro-support", version = "0.1.0" }
