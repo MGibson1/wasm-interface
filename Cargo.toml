@@ -2,6 +2,7 @@
 name = "wasm-interface"
 version = "0.1.0"
 edition = "2021"
+repository = "https://github.com/MGibson1/wasm-interface"
 
 [lib]
 
