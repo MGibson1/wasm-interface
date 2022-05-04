@@ -10,4 +10,4 @@ crate-type = ["cdylib", "rlib"]
 
 [dependencies]
 wasm-bindgen = "0.2.80"
-wasm-interface = { path = "../" }
+wasm-interface = { path = "../", version = "0.1.0" }
