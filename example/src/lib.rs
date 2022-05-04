@@ -1,4 +1,4 @@
-use wasm_interface::*;
+use wasm_interfacegen::*;
 
 #[derive(JsInterface)]
 pub struct Request {

@@ -9,7 +9,7 @@ mod any_types;
 mod array_types;
 
 #[proc_macro_derive(JsInterface)]
-pub fn wasm_interface(input: TokenStream) -> TokenStream {
+pub fn wasm_interfacegen(input: TokenStream) -> TokenStream {
     let input = parse_macro_input!(input as DeriveInput);
     let input_ident = &input.ident;
     let iname = format!("I{}", input.ident);
@@ -45,7 +45,7 @@ pub fn wasm_interface(input: TokenStream) -> TokenStream {
         #[wasm_bindgen::prelude::wasm_bindgen(typescript_custom_section)]
         const #idef_ident: &'static str = #idef;
 
-        #(wasm_interface::assert_impl_all!(#req_impls: wasm_interface::__JsInterface);)*
+        #(wasm_interfacegen::assert_impl_all!(#req_impls: wasm_interfacegen::__JsInterface);)*
         
         #[wasm_bindgen::prelude::wasm_bindgen]
         extern "C" {
@@ -53,7 +53,7 @@ pub fn wasm_interface(input: TokenStream) -> TokenStream {
             pub type #iident;
         }
 
-        impl wasm_interface::__JsInterface for #input_ident {
+        impl wasm_interfacegen::__JsInterface for #input_ident {
             fn js_interface_name() -> &'static str {
                 #iname
             }
