@@ -20,3 +20,8 @@ members = [
 ]
 
 exclude = ["example"]
+
+[workspace.metadata.release]
+allow-branch = ["main"]
+consolidate-commits = true
+consolidate-pushes = true
