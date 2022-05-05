@@ -15,6 +15,12 @@ pub fn wasm_interfacegen(input: TokenStream) -> TokenStream {
     let iname = format!("I{}", input.ident);
     let iident = syn::Ident::new(&iname, input.ident.span());
 
+    if let syn::Data::Enum(syn::DataEnum {ref enum_token, ..}) = input.data {
+        return syn::Error::new(enum_token.span, "JsInterface only supports structs").to_compile_error().into();
+    } else if let syn::Data::Union(syn::DataUnion {ref union_token, ..}) = input.data {
+        return syn::Error::new(union_token.span, "JsInterface only supports structs").to_compile_error().into();
+    }
+
     let fields = if let syn::Data::Struct(syn::DataStruct {
         fields: syn::Fields::Named(syn::FieldsNamed {ref named, .. }),
         ..
@@ -77,7 +83,6 @@ fn map_r_type_to_js_type(ty: &syn::Type) -> Result<String, syn::Error> {
         js_type = "array".into();
     } else {
         js_type = format!("I{}", name);
-        // return Err(syn::Error::new(ty.span(), format!("Unknown type, {}; only string, number, and boolean js types are currently supported", name)));
     }
 
     Ok(js_type)
@@ -94,24 +99,11 @@ fn ty_name(ty: &syn::Type) -> String {
     quote!(#ty).to_string()
 }
 
-// Path(TypePath { qself: None, path: Path { leading_colon: None, segments: [PathSegment { ident: Ident { ident: "String", span: #0 bytes(141..147) }, arguments: None }] } })
-
-// fn ty_inner_type<'a>(wrapper: &str, ty: &'a syn::Type) -> Option<&'a syn::Type> {
-//     if let syn::Type::Path(ref p) = ty {
-//         if p.path.segments.len() != 1 || p.path.segments[0].ident != wrapper {
-//             return None;
-//         }
-
-//         if let syn::PathArguments::AngleBracketed(ref inner_ty) = p.path.segments[0].arguments {
-//             if inner_ty.args.len() != 1 {
-//                 return None;
-//             }
-
-//             let inner_ty = inner_ty.args.first().unwrap();
-//             if let syn::GenericArgument::Type(ref t) = inner_ty.value() {
-//                 return Some(t);
-//             }
-//         }
-//     }
-//     None
-// }
+#[cfg(test)]
+mod tests {
+    #[test]
+    fn try_compile_tests() {
+        let t = trybuild::TestCases::new();
+        t.compile_fail("tests/*.rs");
+    }
+}

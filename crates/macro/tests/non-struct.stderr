@@ -1,0 +1,11 @@
+error: JsInterface only supports structs
+ --> tests/non-struct.rs:5:1
+  |
+5 | enum OnAnEnum{}
+  | ^^^^
+
+error: JsInterface only supports structs
+ --> tests/non-struct.rs:8:1
+  |
+8 | union OnAUnion {
+  | ^^^^^
